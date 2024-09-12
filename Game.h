@@ -1,6 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 #include <string>
+#include "Monster.h"
 
 
 class Game
@@ -17,7 +18,7 @@ private:
 
 	static void ChangeColorMessage(const std::string&, int);
 	void EndRound();
-	void MonsterStat();
+	void MonsterStat(Monster);
 	void ChoiceMonster();
 	void EndGame();
 };

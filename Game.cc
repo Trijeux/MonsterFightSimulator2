@@ -18,11 +18,11 @@ Game::Game()
 
 void Game::GameLoop()
 {
-	do
+	/*do
 	{
-		
+
 	}
-	while (retry_);
+	while (retry_);*/
 }
 
 
@@ -33,6 +33,17 @@ void Game::ChangeColorMessage(const std::string& message, const int color)
 	SetConsoleTextAttribute(terminal, color);
 	std::cout << message;
 	SetConsoleTextAttribute(terminal, 15);
+}
+
+void Game::MonsterStat(Monster monster)
+{
+	std::cout << "Name : ";
+
+	ChangeColorMessage(monster.NameMonster(), monster.Color());
+
+	std::cout << " HP : " << monster.HpMonster() <<
+		" Attack : " << monster.ApMonster() << " Defence : " <<
+		monster.DpMonster() << " Speed : " << monster.SpMonster() << std::endl;
 }
 
 
