@@ -1,7 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 #include <string>
-#include "Monster.h"
+#include "monster.h"
 
 
 class Game
@@ -10,16 +10,41 @@ public:
 	Game(); // Welcome / Rule
 
 	void GameLoop();
+
+
 protected:
 private:
+	enum MonsterRace
+	{
+		kOrc,
+		kTroll,
+		kGoblin,
+		kCentaur,
+		kWerewolf,
+		kElf,
+		kHarpy,
+		kSalamander,
+		kDemon,
+		kSlime,
+		kMinotaur,
+		kDarkMage,
+		kTheGrimReaper
+	};
+
+	enum class RandStat
+	{
+		kAttack,
+		kDefense,
+		kSpeed,
+	};
 
 	bool retry_ = true;
 	int round_ = 0;
 
-	static void ChangeColorMessage(const std::string&, int);
+	static void ChangeColorMessage(const std::string_view&, int);
 	void EndRound();
-	void MonsterStat(Monster);
-	void ChoiceMonster();
+	static void MonsterStat(const Monster&);
+	Monster ChoiceMonster(int);
 	void EndGame();
 };
 

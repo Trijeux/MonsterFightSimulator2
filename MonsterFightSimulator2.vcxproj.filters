@@ -18,24 +18,18 @@
     <ClCompile Include="main.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Monster.cc">
+    <ClCompile Include="monster.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Action.cc">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cc">
+    <ClCompile Include="game.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Monster.h">
+    <ClInclude Include="monster.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Action.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
+    <ClInclude Include="game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

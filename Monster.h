@@ -5,15 +5,19 @@
 class Monster
 {
 public:
-	Monster(std::string, int, int, int, int, int);
+	Monster() = default;
 	~Monster();
 
-	std::string NameMonster() const { return name_monster_; }
-	int HpMonster() const { return hp_monster_; }
-	int ApMonster() const { return ap_monster_; }
-	int DpMonster() const { return dp_monster_; }
-	int SpMonster() const { return sp_monster_; }
-	int Color() const { return color_; }
+	void Creat(std::string_view, int, int, int, int, bool);
+	void AddColor(int);
+
+	[[nodiscard]] std::string_view NameMonster() const { return name_monster_; }
+	[[nodiscard]] int HpMonster() const { return hp_monster_; }
+	[[nodiscard]] int ApMonster() const { return ap_monster_; }
+	[[nodiscard]] int DpMonster() const { return dp_monster_; }
+	[[nodiscard]] int SpMonster() const { return sp_monster_; }
+	[[nodiscard]] int Color() const { return color_; }
+	[[nodiscard]] bool IsWizzard() const { return is_wizzard_; }
 
 protected:
 private:
@@ -23,6 +27,12 @@ private:
 	int dp_monster_ = 0;
 	int sp_monster_ = 0;
 	int color_ = 0;
+	bool is_wizzard_ = false;
+
+	int hp_bouns_monster_ = 0;
+	int ap_bouns_monster_ = 0;
+	int dp_bouns_monster_ = 0;
+	int sp_bouns_monster_ = 0;
 };
 
 #endif // MONSTER_H
