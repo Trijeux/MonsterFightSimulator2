@@ -10,6 +10,7 @@ public:
 
 	void Creat(std::string_view, int, int, int, int, bool);
 	void AddColor(int);
+	int HpDown(int);
 
 	[[nodiscard]] std::string_view NameMonster() const { return name_monster_; }
 	[[nodiscard]] int HpMonster() const { return hp_monster_; }

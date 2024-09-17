@@ -45,6 +45,7 @@ private:
 	void EndRound();
 	static void MonsterStat(const Monster&);
 	Monster ChoiceMonster(int);
+	int CombatRound(Monster&, Monster&, int);
 	void EndGame();
 };
 

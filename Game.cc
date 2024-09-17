@@ -18,24 +18,72 @@ Game::Game()
 
 void Game::GameLoop()
 {
-	Monster monster_a;
-	Monster monster_b;
-
-	monster_a = ChoiceMonster(1);
-	monster_a.AddColor(11);
-
-	monster_b = ChoiceMonster(2);
-	monster_b.AddColor(12);
-
-	MonsterStat(monster_a);
-	MonsterStat(monster_b);
-
-	/*do
+	do
 	{
-		
+		bool end_battle = false;
+		do
+		{
+			bool is_dead_monster = false;
+			int initiative = 0;
+
+			Monster monster_a;
+			Monster monster_b;
+
+			monster_a = ChoiceMonster(1);
+			monster_a.AddColor(11);
+
+			system("cls");
+
+			monster_b = ChoiceMonster(2);
+			monster_b.AddColor(12);
+
+			if (monster_a.SpMonster() > monster_b.SpMonster())
+			{
+				initiative = 1;
+			}
+			else
+			{
+				initiative = 2;
+			}
+
+			system("cls");
+			do
+			{
+				std::cout << "Round : " << round_ << std::endl << std::endl;
+
+				MonsterStat(monster_a);
+				MonsterStat(monster_b);
+
+				initiative = CombatRound(monster_a, monster_b, initiative);
+
+				if (monster_a.HpMonster() <= 0)
+				{
+					std::cout << "Monster : ";
+					ChangeColorMessage(monster_a.NameMonster(), monster_a.Color());
+					std::cout << " is dead" << std::endl;
+					is_dead_monster = true;
+					end_battle = true;
+				}
+
+				else if (monster_b.HpMonster() <= 0)
+				{
+					std::cout << "Monster : ";
+					ChangeColorMessage(monster_b.NameMonster(), monster_b.Color());
+					std::cout << " is dead" << std::endl;
+					is_dead_monster = true;
+					end_battle = true;
+				}
+
+				EndRound();
+				system("pause");
+				system("cls");
+			}
+			while (!is_dead_monster);
+
+		} while (!end_battle);
 
 		EndGame();
-	} while (retry_);*/
+	} while (retry_);
 }
 
 void Game::ChangeColorMessage(const std::string_view& message, const int color)
@@ -81,7 +129,7 @@ Monster Game::ChoiceMonster(int monster)
 			std::cout << "Choice your second monster : " << std::endl;
 		}
 
-		std::cout << 
+		std::cout <<
 			"(1) Orc" << std::endl <<
 			"(2) Troll" << std::endl <<
 			"(3) Goblin" << std::endl <<
@@ -179,13 +227,33 @@ Monster Game::ChoiceMonster(int monster)
 	}
 }
 
+int Game::CombatRound(Monster& monster_a, Monster& monster_b, int first)
+{
+	int dps;
+
+	if (first == 1)
+	{
+		dps = monster_b.HpDown(monster_a.ApMonster());
+		ChangeColorMessage(monster_a.NameMonster(), monster_a.Color());
+		std::cout << " attack : " << dps << std::endl;
+		return 2;
+	}
+	else if(first == 2)
+	{
+		dps = monster_a.HpDown(monster_b.ApMonster());
+		ChangeColorMessage(monster_b.NameMonster(), monster_b.Color());
+		std::cout << " attack : " << dps << std::endl;
+		return 1;
+	}
+}
+
 void Game::EndGame()
 {
 	char player_choice;
 	bool valid_input = false;
 	do
 	{
-		std::cout << "Do you want to fight again ? ";
+		std::cout << "Do you want to fight again ? (Y/y) (N/n) ";
 
 		std::cin >> player_choice;
 
@@ -203,6 +271,8 @@ void Game::EndGame()
 		{
 			std::cout << "Input is invalid" << std::endl;
 		}
+
+		system("cls");
 	} while (!valid_input);
 }
 
