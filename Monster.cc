@@ -25,7 +25,7 @@ void Monster::AddColor(const int color)
 
 int Monster::HpDown(int attack)
 {
-	if (dp_monster_ > attack)
+	if (dp_monster_ >= attack)
 	{
 		std::cout << "Attack fail" << std::endl;
 		return 0;

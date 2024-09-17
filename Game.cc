@@ -54,7 +54,11 @@ void Game::GameLoop()
 				MonsterStat(monster_a);
 				MonsterStat(monster_b);
 
+				std::cout << std::endl;
+
 				initiative = CombatRound(monster_a, monster_b, initiative);
+
+				std::cout << std::endl;
 
 				if (monster_a.HpMonster() <= 0)
 				{
@@ -108,9 +112,9 @@ void Game::MonsterStat(const Monster& monster)
 
 	ChangeColorMessage(monster.NameMonster(), monster.Color());
 
-	std::cout << " HP : " << monster.HpMonster() <<
-		" Attack : " << monster.ApMonster() << " Defence : " <<
-		monster.DpMonster() << " Speed : " << monster.SpMonster() << std::endl;
+	std::cout << " / HP : " << monster.HpMonster() <<
+		" / Attack : " << monster.ApMonster() << " / Defence : " <<
+		monster.DpMonster() << " / Speed : " << monster.SpMonster() << std::endl;
 }
 
 Monster Game::ChoiceMonster(int monster)
@@ -141,8 +145,9 @@ Monster Game::ChoiceMonster(int monster)
 			"(9) Demon" << std::endl <<
 			"(10) Slime" << std::endl <<
 			"(11) Minotaur" << std::endl <<
-			"(12) DarkMage" << std::endl <<
-			"(13) TheGrimReaper" << std::endl;
+			"(12) Dark Mage" << std::endl <<
+			"(13) The Grim Reaper" << std::endl <<
+			"(14) Trolling" << std::endl;
 
 		std::cin >> choice_monster;
 
@@ -182,6 +187,7 @@ Monster Game::ChoiceMonster(int monster)
 	Monster minotaur;
 	Monster dark_mage;
 	Monster the_grim_reaper;
+	Monster trolling;
 
 	switch (choice_monster)
 	{
@@ -224,21 +230,24 @@ Monster Game::ChoiceMonster(int monster)
 	case kTheGrimReaper:
 		centaur.Creat("The Grim Reaper", 1000, 50, 25, 100, true);
 		return centaur;
+	case kTrolling :
+		trolling.Creat("Trolling", 1, 1, 1, 1, false);
+		return trolling;
 	}
 }
 
-int Game::CombatRound(Monster& monster_a, Monster& monster_b, int first)
+int Game::CombatRound(Monster& monster_a, Monster& monster_b, const int initiative)
 {
 	int dps;
 
-	if (first == 1)
+	if (initiative == 1)
 	{
 		dps = monster_b.HpDown(monster_a.ApMonster());
 		ChangeColorMessage(monster_a.NameMonster(), monster_a.Color());
 		std::cout << " attack : " << dps << std::endl;
 		return 2;
 	}
-	else if(first == 2)
+	else if(initiative == 2)
 	{
 		dps = monster_a.HpDown(monster_b.ApMonster());
 		ChangeColorMessage(monster_b.NameMonster(), monster_b.Color());

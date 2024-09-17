@@ -28,7 +28,8 @@ private:
 		kSlime,
 		kMinotaur,
 		kDarkMage,
-		kTheGrimReaper
+		kTheGrimReaper,
+		kTrolling
 	};
 
 	enum class RandStat
