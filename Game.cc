@@ -84,6 +84,8 @@ void Game::GameLoop()
 			}
 			while (!is_dead_monster);
 
+			round_ = 0;
+
 		} while (!end_battle);
 
 		EndGame();
@@ -160,9 +162,9 @@ Monster Game::ChoiceMonster(int monster)
 		}
 		else
 		{
-			if (choice_monster > 0)
+			choice_monster--;
+			if (choice_monster >= kOrc && choice_monster < kMax)
 			{
-				choice_monster--;
 				input_valid = true;
 			}
 			else
